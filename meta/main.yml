@@ -1,0 +1,11 @@
+galaxy_info:
+  role_name: required
+  author: Nick Fields
+  description: Asserts that required items exists
+  license: license (MIT)
+  min_ansible_version: 2.7
+
+  galaxy_tags:
+    - system
+    - development
+    - assert

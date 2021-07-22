@@ -1,0 +1,4 @@
+---
+- name: Validate Required Criteria
+  include_tasks: validations.yml
+  when: required_vars is defined or required_local_paths is defined or required_remote_paths is defined

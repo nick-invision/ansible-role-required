@@ -1,0 +1,34 @@
+---
+- name: Validate prerequisites
+  delegate_to: localhost
+  block:
+    - name: Check required variables are set
+      run_once: true
+      assert:
+        that:
+          - "{{ item }} is defined"
+          - "{{ item }} | length > 0"
+        quiet: true
+        fail_msg: "Required variable {{ item }} undefined or zero length"
+      loop: "{{ required_vars }}"
+      when: required_vars is defined
+
+    - name: Check required local paths exist
+      run_once: true
+      assert:
+        that:
+          - "item is exists"
+        quiet: true
+        fail_msg: "Required path {{ item }} not found locally"
+      loop: "{{ required_local_paths }}"
+      when: required_local_paths is defined
+
+    - name: Check required remote paths exist
+      assert:
+        that:
+          - "item is exists"
+        quiet: true
+        fail_msg: "Required path {{ item }} not found locally"
+      loop: "{{ required_remote_paths }}"
+      run_once: false
+      when: required_remote_paths is defined
